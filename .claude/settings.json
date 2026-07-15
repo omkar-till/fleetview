@@ -10,7 +10,8 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/login.png --window-size=1440,900 --hide-scrollbars http://localhost:3100/login)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device.png --window-size=430,900 --hide-scrollbars http://localhost:3100/device)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device500.png --window-size=500,900 --hide-scrollbars http://localhost:3100/device)",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "Bash(env -u GITHUB_TOKEN gh auth status)"
     ]
   }
 }

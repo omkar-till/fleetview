@@ -7,10 +7,13 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const { headers, ...rest } = options
   const res = await fetch(path, {
-    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
     credentials: 'same-origin',
-    ...options,
+    ...rest,
+    // Merged last so callers can add headers (e.g. device Authorization)
+    // without clobbering the JSON Content-Type.
+    headers: { 'Content-Type': 'application/json', ...(headers || {}) },
   })
   const body = await res.json().catch(() => ({}))
   if (!res.ok) throw new ApiError(res.status, body.error || 'Request failed')
