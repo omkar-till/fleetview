@@ -1,0 +1,17 @@
+# Render Blueprint — deploys FleetView on the free tier.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: fleetview
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: '20'
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false # paste your free Neon.tech Postgres URL when prompted

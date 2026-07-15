@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(qlmanage -t -s 512 -o public public/icon.svg)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(docker run *)",
+      "Bash(docker exec *)",
+      "Bash(DATABASE_URL='postgres://postgres:fleetview@localhost:55432/fleetview' NODE_ENV=production PORT=3100 npx tsx server/index.ts)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/login.png --window-size=1440,900 --hide-scrollbars http://localhost:3100/login)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device.png --window-size=430,900 --hide-scrollbars http://localhost:3100/device)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device500.png --window-size=500,900 --hide-scrollbars http://localhost:3100/device)",
+      "Bash(git init *)"
+    ]
+  }
+}
