@@ -1,7 +1,7 @@
 import crypto from 'node:crypto'
 import bcrypt from 'bcryptjs'
 import { Router } from 'express'
-import { AuthedRequest, COOKIE_NAME, requireAuth, signSession } from '../auth.js'
+import { AuthedRequest, COOKIE_NAME, requireAuth, sha256, signSession } from '../auth.js'
 import { query } from '../db.js'
 
 const router = Router()
@@ -49,6 +49,34 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ error: 'Invalid email or password' })
   }
   res.cookie(COOKIE_NAME, signSession(user.id), cookieOptions)
+  res.json({ ok: true })
+})
+
+/** Public: look up who an invite belongs to (shown on the set-password page). */
+router.get('/invite/:token', async (req, res) => {
+  const { rows } = await query(
+    `SELECT u.name, u.email, c.name AS company_name
+     FROM users u JOIN companies c ON c.id = u.company_id
+     WHERE u.invite_token = $1`,
+    [sha256(req.params.token)],
+  )
+  if (!rows[0]) return res.status(404).json({ error: 'This invite link is invalid or was already used' })
+  res.json({ invite: rows[0] })
+})
+
+/** Public: set password via invite token, then sign straight in. */
+router.post('/accept-invite', async (req, res) => {
+  const { token, password } = req.body ?? {}
+  if (!password || password.length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters' })
+  }
+  const { rows } = await query(
+    `UPDATE users SET password_hash = $1, invite_token = NULL
+     WHERE invite_token = $2 RETURNING id`,
+    [await bcrypt.hash(password, 10), sha256(String(token ?? ''))],
+  )
+  if (!rows[0]) return res.status(404).json({ error: 'This invite link is invalid or was already used' })
+  res.cookie(COOKIE_NAME, signSession(rows[0].id), cookieOptions)
   res.json({ ok: true })
 })
 

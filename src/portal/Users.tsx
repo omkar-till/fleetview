@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
-import { IconKey, IconPlus, IconTrash, IconUsers } from '../components/Icons'
+import { IconKey, IconLink, IconPlus, IconTrash, IconUsers } from '../components/Icons'
 import { Avatar, EmptyState, Modal, Spinner, useToast } from '../components/ui'
 import { api, type User } from '../lib/api'
 import { useSession } from './AuthContext'
@@ -9,6 +9,7 @@ export function Users() {
   const [loaded, setLoaded] = useState(false)
   const [adding, setAdding] = useState(false)
   const [pinReveal, setPinReveal] = useState<{ name: string; pin: string } | null>(null)
+  const [inviteReveal, setInviteReveal] = useState<{ name: string; url: string } | null>(null)
   const { user: me } = useSession()
   const toast = useToast()
 
@@ -27,6 +28,15 @@ export function Users() {
       setPinReveal({ name: user.name, pin })
     } catch (err) {
       toast(err instanceof Error ? err.message : 'Failed to reset PIN', 'error')
+    }
+  }
+
+  async function invite(user: User) {
+    try {
+      const { token } = await api.post<{ token: string }>(`/api/users/${user.id}/invite`)
+      setInviteReveal({ name: user.name, url: `${window.location.origin}/invite?token=${token}` })
+    } catch (err) {
+      toast(err instanceof Error ? err.message : 'Failed to create invite', 'error')
     }
   }
 
@@ -82,6 +92,9 @@ export function Users() {
                       <td className="muted">{u.device_count ?? 0}</td>
                       <td>
                         <span className="row" style={{ justifyContent: 'flex-end', gap: 6 }}>
+                          <button className="btn secondary sm" onClick={() => invite(u)} title="Portal invite / password reset link">
+                            <IconLink size={15} /> Invite
+                          </button>
                           <button className="btn secondary sm" onClick={() => resetPin(u)} title="Reset transfer PIN">
                             <IconKey size={15} /> Reset PIN
                           </button>
@@ -112,6 +125,7 @@ export function Users() {
         />
       )}
       {pinReveal && <PinRevealModal {...pinReveal} onClose={() => setPinReveal(null)} />}
+      {inviteReveal && <InviteLinkModal {...inviteReveal} onClose={() => setInviteReveal(null)} />}
     </>
   )
 }
@@ -155,16 +169,58 @@ function AddUserModal({
         <div className="field">
           <label htmlFor="user-role">Role</label>
           <select id="user-role" className="input" value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="member">Member — can hold devices</option>
-            <option value="admin">Admin — can hold devices (portal access needs a password, set separately)</option>
+            <option value="member">Member</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
-        <p className="muted">A 4-digit transfer PIN is generated automatically and shown once.</p>
+        <p className="muted">
+          A 4-digit transfer PIN is generated automatically and shown once. To give them portal access, use the{' '}
+          <strong>Invite</strong> button after adding them.
+        </p>
         <div className="row" style={{ justifyContent: 'flex-end', gap: 10 }}>
           <button type="button" className="btn secondary" onClick={onClose}>Cancel</button>
           <button className="btn" disabled={busy}>{busy ? <Spinner /> : 'Add person'}</button>
         </div>
       </form>
+    </Modal>
+  )
+}
+
+function InviteLinkModal({ name, url, onClose }: { name: string; url: string; onClose: () => void }) {
+  const [copied, setCopied] = useState(false)
+  const toast = useToast()
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      toast('Could not copy — select the link manually', 'error')
+    }
+  }
+
+  return (
+    <Modal title="Portal invite link" onClose={onClose}>
+      <p className="muted">
+        Send this link privately to <strong style={{ color: 'var(--text)' }}>{name}</strong>. They'll set their own
+        password and sign in. The link works <strong style={{ color: 'var(--text)' }}>once</strong> — generating a new
+        one also acts as a password reset.
+      </p>
+      <div
+        className="mono"
+        style={{
+          padding: '12px 14px',
+          background: 'var(--primary-light)',
+          borderRadius: 'var(--radius-m)',
+          fontSize: 12,
+          wordBreak: 'break-all',
+          userSelect: 'all',
+        }}
+      >
+        {url}
+      </div>
+      <button className="btn" onClick={copy}>{copied ? 'Copied ✓' : 'Copy link'}</button>
     </Modal>
   )
 }

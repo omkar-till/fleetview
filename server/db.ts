@@ -71,6 +71,9 @@ CREATE TABLE IF NOT EXISTS device_events (
   created_at timestamptz NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS idx_events_device ON device_events(device_id, created_at DESC);
+
+ALTER TABLE users ADD COLUMN IF NOT EXISTS invite_token text;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_invite ON users(invite_token);
 `
 
 export async function migrate() {

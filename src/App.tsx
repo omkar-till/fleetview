@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { DeviceApp } from './device/DeviceApp'
+import { AcceptInvite } from './portal/AcceptInvite'
 import { AuthProvider } from './portal/AuthContext'
 import { Dashboard } from './portal/Dashboard'
 import { DeviceDetail } from './portal/DeviceDetail'
@@ -19,6 +20,7 @@ export default function App() {
       {/* Company portal */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/invite" element={<AcceptInvite />} />
       <Route
         element={
           <AuthProvider>

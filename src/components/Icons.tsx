@@ -92,6 +92,13 @@ export const IconTrash = (p: IconProps) => (
   </svg>
 )
 
+export const IconLink = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M10.5 13.5a4.2 4.2 0 0 0 6 0l3.2-3.2a4.24 4.24 0 0 0-6-6l-1.6 1.6" />
+    <path d="M13.5 10.5a4.2 4.2 0 0 0-6 0l-3.2 3.2a4.24 4.24 0 0 0 6 6l1.6-1.6" />
+  </svg>
+)
+
 export const IconBattery = (p: IconProps) => (
   <svg {...base(p)}>
     <rect x="2" y="8" width="17" height="8" rx="2" />

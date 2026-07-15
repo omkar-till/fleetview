@@ -1,7 +1,7 @@
 import crypto from 'node:crypto'
 import bcrypt from 'bcryptjs'
 import { Router } from 'express'
-import { AuthedRequest, requireAuth } from '../auth.js'
+import { AuthedRequest, requireAuth, sha256 } from '../auth.js'
 import { query } from '../db.js'
 
 const router = Router()
@@ -65,6 +65,21 @@ router.post('/', async (req: AuthedRequest, res) => {
   )
   // PIN is returned exactly once — only hashes are stored.
   res.json({ user: rows[0], pin })
+})
+
+/**
+ * Generate a one-time invite link so this person can set a portal password.
+ * Also works as a password reset — accepting the invite overwrites the password.
+ */
+router.post('/:id/invite', async (req: AuthedRequest, res) => {
+  const token = crypto.randomBytes(24).toString('hex')
+  const { rows } = await query(
+    `UPDATE users SET invite_token = $1 WHERE id = $2 AND company_id = $3 RETURNING id`,
+    [sha256(token), req.params.id, req.user!.company_id],
+  )
+  if (!rows[0]) return res.status(404).json({ error: 'User not found' })
+  // Raw token is returned exactly once — only its hash is stored.
+  res.json({ token })
 })
 
 router.post('/:id/reset-pin', async (req: AuthedRequest, res) => {
