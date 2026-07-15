@@ -4,6 +4,8 @@ Open-source device management for small teams. Allocate company devices to peopl
 
 **Portal** (desktop) · **Device app** (PWA, runs on the managed device — no app store needed)
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/omkar-till/fleetview)
+
 ## Features
 
 - 🏢 **Multi-tenant** — sign up creates your company workspace; everything is scoped to it
@@ -23,7 +25,7 @@ cp .env.example .env   # set DATABASE_URL (any Postgres) and JWT_SECRET
 npm run dev            # API on :3000, web on :5173
 ```
 
-Open http://localhost:5173, create your company, add a device, then open http://localhost:5173/device in another browser/phone to enroll it.
+Open <http://localhost:5173>, create your company, add a device, then open <http://localhost:5173/device> in another browser/phone to enroll it.
 
 Tables are created automatically on first boot — no migration step.
 
@@ -48,7 +50,7 @@ Tables are created automatically on first boot — no migration step.
 
 ### Device flow
 
-```
+```text
 Portal: Add device  →  enrollment code / QR
 Device: open /device → enter code → receives permanent device token
 Device: shares location every 60s while open (user-controlled toggle)
@@ -61,7 +63,7 @@ Location is only sent while the device app is open **and** the sharing toggle is
 
 ## Project layout
 
-```
+```text
 server/          Express API (auth, users, devices, device endpoints)
 src/portal/      Company portal (dashboard, devices, people, live map)
 src/device/      Device PWA (enroll, PIN pad, location sharing)
