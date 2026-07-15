@@ -1,5 +1,5 @@
 {
-  "name": "fleetview",
+  "name": "oolio-fleet",
   "version": "1.0.0",
   "description": "Open-source device management — allocate devices to people, transfer with a PIN, track location on a live map.",
   "type": "module",

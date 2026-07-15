@@ -104,12 +104,3 @@ export const IconShield = (p: IconProps) => (
     <path d="M12 2.5 4.5 5.5v6c0 4.7 3.2 8.4 7.5 10 4.3-1.6 7.5-5.3 7.5-10v-6L12 2.5Z" />
   </svg>
 )
-
-export const IconLogo = (p: IconProps) => (
-  <svg {...base({ strokeWidth: 2.2, ...p })}>
-    <rect x="7" y="2.5" width="10" height="16" rx="2.5" />
-    <path d="M12 21.5s0 0 0 0" />
-    <circle cx="12" cy="21" r="0.5" fill="currentColor" />
-    <path d="M4 9v4M20 9v4" />
-  </svg>
-)

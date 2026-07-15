@@ -12,7 +12,7 @@ export interface MapMarker {
 }
 
 /**
- * Thin Leaflet wrapper — custom div markers in the FleetView palette,
+ * Thin Leaflet wrapper — custom div markers in the Oolio Fleet palette,
  * OpenStreetMap tiles (free, attribution required).
  */
 export function DeviceMap({

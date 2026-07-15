@@ -1,4 +1,4 @@
-# FleetView
+# Oolio Fleet
 
 Open-source device management for small teams. Allocate company devices to people, transfer a device to someone else with a 4-digit PIN right on the device, and watch every device's live location on a map — all from one free deployment.
 

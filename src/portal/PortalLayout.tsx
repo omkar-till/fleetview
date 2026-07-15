@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { IconDevice, IconGrid, IconLogo, IconLogout, IconMap, IconUsers } from '../components/Icons'
+import { IconDevice, IconGrid, IconLogout, IconMap, IconUsers } from '../components/Icons'
+import { BrandLogo } from '../components/ui'
 import { api } from '../lib/api'
 import { useSession } from './AuthContext'
 
@@ -23,10 +24,8 @@ export function PortalLayout() {
     <div className="layout">
       <aside className="sidebar">
         <div className="sidebar-brand">
-          <span className="logo-mark">
-            <IconLogo size={18} />
-          </span>
-          <span>FleetView</span>
+          <BrandLogo size={30} />
+          <span>Oolio Fleet</span>
         </div>
         <div className="sidebar-company">
           <div className="company-name">{company.name}</div>

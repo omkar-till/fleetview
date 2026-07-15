@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { IconLogo } from '../components/Icons'
-import { Spinner } from '../components/ui'
+import { BrandLogo, Spinner } from '../components/ui'
 import { api } from '../lib/api'
 
 export function Login() {
@@ -29,9 +28,7 @@ export function Login() {
     <div className="auth-screen">
       <form className="card auth-card" onSubmit={submit}>
         <div className="row" style={{ justifyContent: 'center', marginBottom: 4 }}>
-          <span className="logo-mark" style={{ width: 40, height: 40, borderRadius: 10, background: 'var(--gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
-            <IconLogo size={22} />
-          </span>
+          <BrandLogo size={44} />
         </div>
         <div style={{ textAlign: 'center' }}>
           <h1>Welcome back</h1>

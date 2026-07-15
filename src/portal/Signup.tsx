@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { IconLogo } from '../components/Icons'
-import { Spinner } from '../components/ui'
+import { BrandLogo, Spinner } from '../components/ui'
 import { api } from '../lib/api'
 
 export function Signup() {
@@ -31,12 +30,10 @@ export function Signup() {
     <div className="auth-screen">
       <form className="card auth-card" onSubmit={submit}>
         <div className="row" style={{ justifyContent: 'center', marginBottom: 4 }}>
-          <span style={{ width: 40, height: 40, borderRadius: 10, background: 'var(--gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
-            <IconLogo size={22} />
-          </span>
+          <BrandLogo size={44} />
         </div>
         <div style={{ textAlign: 'center' }}>
-          <h1>Set up FleetView</h1>
+          <h1>Set up Oolio Fleet</h1>
           <p className="muted">Create your company workspace</p>
         </div>
         <div className="field">

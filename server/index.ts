@@ -39,7 +39,7 @@ const port = Number(process.env.PORT) || 3000
 
 migrate()
   .then(() => {
-    app.listen(port, () => console.log(`FleetView API listening on :${port}`))
+    app.listen(port, () => console.log(`Oolio Fleet API listening on :${port}`))
   })
   .catch((err) => {
     console.error('Migration failed — check DATABASE_URL', err)

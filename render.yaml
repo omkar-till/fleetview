@@ -1,4 +1,5 @@
-# Render Blueprint — deploys FleetView on the free tier.
+# Render Blueprint — deploys Oolio Fleet on the free tier.
+# (service name stays "fleetview" to match the existing deploy/repo)
 # Docs: https://render.com/docs/blueprint-spec
 services:
   - type: web

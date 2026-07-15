@@ -1,5 +1,5 @@
-/* FleetView service worker — network-first, keeps the app installable. */
-const CACHE = 'fleetview-v1'
+/* Oolio Fleet service worker — network-first, keeps the app installable. */
+const CACHE = 'oolio-fleet-v2'
 
 self.addEventListener('install', (event) => {
   self.skipWaiting()

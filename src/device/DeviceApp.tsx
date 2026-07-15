@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { IconLogo, IconMap, IconShield, IconTransfer } from '../components/Icons'
-import { Avatar, Spinner, useToast } from '../components/ui'
+import { IconMap, IconShield, IconTransfer } from '../components/Icons'
+import { Avatar, BrandLogo, Spinner, useToast } from '../components/ui'
 import { ApiError, deviceApi } from '../lib/api'
 import { PinPad } from './PinPad'
 
@@ -52,18 +52,11 @@ function EnrollScreen({ onEnrolled }: { onEnrolled: () => void }) {
 
   return (
     <div className="device-screen" style={{ justifyContent: 'center' }}>
-      <div style={{ textAlign: 'center', marginBottom: 8 }}>
-        <span
-          style={{
-            width: 56, height: 56, borderRadius: 14, background: 'var(--gradient)',
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff',
-          }}
-        >
-          <IconLogo size={30} />
-        </span>
+      <div style={{ textAlign: 'center', marginBottom: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <BrandLogo size={56} />
         <h1 style={{ marginTop: 14 }}>Enroll this device</h1>
         <p className="muted" style={{ marginTop: 6 }}>
-          Enter the 6-character code from your company's FleetView portal.
+          Enter the 6-character code from your company's Oolio Fleet portal.
         </p>
       </div>
       <form onSubmit={submit} className="card" style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -169,14 +162,7 @@ function DeviceHome({ onSignedOut }: { onSignedOut: () => void }) {
   return (
     <div className="device-screen">
       <div className="row" style={{ justifyContent: 'center', padding: '10px 0 4px' }}>
-        <span
-          style={{
-            width: 34, height: 34, borderRadius: 9, background: 'var(--gradient)',
-            display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff',
-          }}
-        >
-          <IconLogo size={19} />
-        </span>
+        <BrandLogo size={34} />
         <div>
           <div style={{ fontWeight: 700 }}>{state.name}</div>
           <div className="muted" style={{ fontSize: 12 }}>{state.company_name}</div>
@@ -259,7 +245,7 @@ function DeviceHome({ onSignedOut }: { onSignedOut: () => void }) {
 
       <div className="row muted" style={{ justifyContent: 'center', gap: 6, fontSize: 12 }}>
         <IconShield size={14} />
-        Managed by {state.company_name} · FleetView
+        Managed by {state.company_name} · Oolio Fleet
       </div>
 
       {transferring && (

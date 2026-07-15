@@ -11,7 +11,15 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device.png --window-size=430,900 --hide-scrollbars http://localhost:3100/device)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device500.png --window-size=500,900 --hide-scrollbars http://localhost:3100/device)",
       "Bash(git init *)",
-      "Bash(env -u GITHUB_TOKEN gh auth status)"
+      "Bash(env -u GITHUB_TOKEN gh auth status)",
+      "Bash(cp /Users/omkar/mobilepay/payapp/assets/icons/app_icon.png public/icon-512.png && sips -Z 192 public/icon-512.png --out public/icon-192.png >/dev/null && rm public/icon.svg && ls -la public/)",
+      "Bash(sed -i '' 's/FleetView/Oolio Fleet/g' src/styles/global.css src/components/DeviceMap.tsx server/index.ts)",
+      "Bash(sed -i '' -e 's/FleetView/Oolio Fleet/g' -e \"s/'fleetview-v1'/'oolio-fleet-v2'/g\" public/sw.js)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/login-brand.png --window-size=1440,900 --hide-scrollbars http://localhost:3100/login)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-502/-Users-omkar-devicemeangement/d3b413c4-9679-4658-84c8-a2753cfd7264/scratchpad/device-brand.png --window-size=500,900 --hide-scrollbars http://localhost:3100/device)"
+    ],
+    "additionalDirectories": [
+      "/Users/omkar/mobilepay/payapp/assets/icons"
     ]
   }
 }

@@ -84,6 +84,18 @@ export function Modal({
 
 /* ---------- Small bits ---------- */
 
+export function BrandLogo({ size = 34 }: { size?: number }) {
+  return (
+    <img
+      src="/icon-192.png"
+      alt="Oolio Fleet"
+      width={size}
+      height={size}
+      style={{ borderRadius: Math.round(size * 0.26), display: 'block', flexShrink: 0 }}
+    />
+  )
+}
+
 export function Avatar({ name }: { name: string }) {
   const initials = name
     .split(/\s+/)
